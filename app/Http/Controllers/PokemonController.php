@@ -26,12 +26,14 @@ class PokemonController extends Controller
         return response()->json([
             'labels' => $labels,
             'data' => $stats,
+            'image' => asset("poke-image/{$name}.png"), // Ruta local a la imagen
             'color' => [
                 'bg' => 'rgba(' . rand(100,255) . ',' . rand(100,255) . ',' . rand(100,255) . ', 0.4)',
                 'border' => 'rgba(' . rand(100,255) . ',' . rand(100,255) . ',' . rand(100,255) . ', 1)'
             ]
         ]);
     }
+    
     
 
 }
