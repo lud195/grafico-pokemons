@@ -137,7 +137,7 @@
 
     <div class="container">
         <canvas id="pokemonChart"></canvas>
-        <img id="pokemon-image" src="" alt="Imagen del Pokémon" />
+        <img id="pokemon-image" src=""  />
     </div>
 
     <footer>Hecho con ❤️ y ⚡ estilo Pikachu moderno</footer>

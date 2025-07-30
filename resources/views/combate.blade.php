@@ -109,7 +109,7 @@
 
     <div id="pokemon-images">
         <img id="img-pikachu" src="/poke-image/pikachu.png" alt="Pikachu" />
-        <img id="img-opponent" src="" alt="Pokémon rival" />
+        <img id="img-opponent" src=""  />
     </div>
 
     <a href="/" class="btn-volver">← Volver</a>
@@ -117,23 +117,23 @@
     <footer>Hecho con ❤️ y ⚡ estilo Pikachu moderno</footer>
 
 
-<script>
+    <script>
     const ctx = document.getElementById('combatChart').getContext('2d');
     let combatChart;
 
-    // Diccionario de colores personalizados por Pokémon
+    // Colores modernos y vibrantes iguales a los de la gráfica principal
     const pokemonColors = {
-        pikachu: 'rgba(255, 206, 86, 0.8)',
-        charizard: 'rgba(255, 99, 132, 0.8)',
-        bulbasaur: 'rgba(75, 192, 192, 0.8)',
-        squirtle: 'rgba(54, 162, 235, 0.8)',
-        gengar: 'rgba(153, 102, 255, 0.8)',
-        lucario: 'rgba(100, 100, 255, 0.8)',
-        eevee: 'rgba(255, 179, 71, 0.8)',
-        mewtwo: 'rgba(150, 150, 255, 0.8)'
+        pikachu: 'rgba(255, 222, 46, 0.5)',
+        charizard: 'rgba(255, 140, 0, 0.5)',
+        bulbasaur: 'rgba(120, 200, 80, 0.5)',
+        squirtle: 'rgba(100, 149, 237, 0.5)',
+        gengar: 'rgba(147, 112, 219, 0.5)',
+        lucario: 'rgba(0, 153, 204, 0.5)',
+        charmander: 'rgba(255, 99, 71, 0.5)',
+        eevee: 'rgba(255, 179, 71, 0.5)',
+        mewtwo: 'rgba(150, 150, 255, 0.5)'
     };
 
-    // Stats base de Pikachu
     const pikachuStats = {
         speed: 90,
         attack: 55,
@@ -143,12 +143,10 @@
         hp: 35
     };
 
-    // Capitalizar nombre
     function capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    // Función principal que actualiza el combate
     async function updateCombat(pokemon) {
         if (!pokemon) {
             if (combatChart) combatChart.destroy();
@@ -157,7 +155,6 @@
             return;
         }
 
-        // Cambiar imagen del oponente
         const opponentImg = document.getElementById('img-opponent');
         opponentImg.src = `/poke-image/${pokemon}.png`;
         opponentImg.alt = capitalize(pokemon);
@@ -169,16 +166,13 @@
             const labels = data.labels;
             const stats = data.data;
 
-            // Convertimos los stats del oponente a objeto por nombre
             const opponentStats = {};
             labels.forEach((label, i) => {
-                opponentStats[label] = stats[i];
+                opponentStats[label.toLowerCase()] = stats[i];
             });
 
-            // Destruir gráfico previo si existe
             if (combatChart) combatChart.destroy();
 
-            // Crear nuevo gráfico
             combatChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -206,7 +200,7 @@
                                 opponentStats['special-defense'],
                                 opponentStats['hp']
                             ],
-                            backgroundColor: pokemonColors[pokemon] || 'rgba(150, 150, 150, 0.8)'
+                            backgroundColor: pokemonColors[pokemon] || 'rgba(180, 180, 180, 0.5)'
                         }
                     ]
                 },
@@ -216,7 +210,7 @@
                     scales: {
                         x: {
                             beginAtZero: true,
-                            max: 130
+                            max: 200
                         }
                     },
                     plugins: {
@@ -240,7 +234,6 @@
         }
     }
 
-    // Evento del <select>
     document.getElementById('pokemon-select').addEventListener('change', function () {
         updateCombat(this.value);
     });
